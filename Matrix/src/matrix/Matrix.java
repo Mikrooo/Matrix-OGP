@@ -17,8 +17,8 @@ public class Matrix {
 	/**
 	 * @invar | 0 <= aantalRijen
 	 * @invar | 0 <= aantalKolommen
-	 * @invar | elementenRowMajor != null
-	 * @invar | elementenRowMajor.length == aantalRijen * aantalKolommen
+	 * @invar | elementenColumnMajor != null
+	 * @invar | elementenColumnMajor.length == aantalRijen * aantalKolommen
 	 * 
 	 */
 	private int aantalRijen;
@@ -27,7 +27,7 @@ public class Matrix {
 	/**\
 	 * @representationObject
 	 */
-	private double[] elementenRowMajor;
+	private double[] elementenColumnMajor;
 		
 
 	public int getAantalRijen() {
@@ -45,7 +45,7 @@ public class Matrix {
 	 * @post | result == getElementen()[rijIndex][kolomIndex]
 	 */
 	public double getElementAt(int rijIndex, int kolomIndex) {
-		return elementenRowMajor[rijIndex * aantalKolommen + kolomIndex];
+		return elementenColumnMajor[kolomIndex * aantalKolommen + rijIndex];
 
 	}
 	
@@ -60,8 +60,13 @@ public class Matrix {
 	 * 		 | )
 	 */
 	public double[] getElementenRowMajor() {
-//		return Arrays.copyOf(elementenRowMajor); // representation exposure
-		return elementenRowMajor.clone() ;
+		double[] result = new double[elementenColumnMajor.length];
+		for (int i = 0; i < aantalRijen; i++) {
+			for (int j = 0; j < aantalKolommen; j++) {
+				result[(i * aantalKolommen) + j] = elementenColumnMajor[(j * aantalRijen) + i];
+			}
+		}
+		return result;
 	}
 	
 	/**
@@ -75,13 +80,7 @@ public class Matrix {
 	 * 		 | )
 	 */
 	public double[] getElementenColumnMajor() {
-		double[] result = new double[elementenRowMajor.length];
-		for (int i = 0; i < aantalRijen; i++) {
-			for (int j = 0; j < aantalKolommen; j++) {
-				result[(j * aantalRijen) + i] = elementenRowMajor[(i * aantalKolommen) + j];
-			}
-		}
-		return result;
+		return elementenColumnMajor.clone();
 	}
 	
 	
@@ -97,7 +96,7 @@ public class Matrix {
 			double[] rij = new double[aantalKolommen];
 			result[i] = rij;
 			for (int j = 0; j < aantalKolommen; j++) {
-				rij[j] = elementenRowMajor[i * aantalKolommen + j];
+				rij[j] = elementenColumnMajor[j * aantalRijen + i];
 			}
 		}
 		return result;
@@ -119,7 +118,13 @@ public class Matrix {
 	public Matrix(int aantalRijen, int aantalKolommen, double[] elementenRowMajor) {
 		this.aantalRijen = aantalRijen;
 		this.aantalKolommen = aantalKolommen;
-		this.elementenRowMajor = elementenRowMajor.clone(); // Hier kan ook representation exposure voorkomen
+
+		this.elementenColumnMajor  = new double[elementenRowMajor.length];
+		for (int i = 0; i < aantalRijen; i++) {
+			for (int j = 0; j < aantalKolommen; j++) {
+				elementenColumnMajor[(j * aantalRijen) + i] = elementenRowMajor[(i * aantalKolommen) + j];
+			}
+		}
 	}
 	
 	
