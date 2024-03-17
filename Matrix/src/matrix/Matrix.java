@@ -13,29 +13,16 @@ import java.util.Arrays;
  */
 
 public class Matrix {
-	
-	/**
-	 * @invar | 0 <= aantalRijen
-	 * @invar | 0 <= aantalKolommen
-	 * @invar | elementenRowMajor != null
-	 * @invar | elementenRowMajor.length == aantalRijen * aantalKolommen
-	 * 
-	 */
-	private int aantalRijen;
-	private int aantalKolommen;
-	
-	/**\
-	 * @representationObject
-	 */
-	private double[] elementenRowMajor;
-		
+
 
 	public int getAantalRijen() {
-		return aantalRijen;
+		throw new RuntimeException("Not yet implemented");
+		
 	}
 
 	public int getAantalKolommen() {
-		return aantalKolommen;
+		throw new RuntimeException("Not yet implemented");
+
 	}
 	
 	
@@ -45,7 +32,7 @@ public class Matrix {
 	 * @post | result == getElementen()[rijIndex][kolomIndex]
 	 */
 	public double getElementAt(int rijIndex, int kolomIndex) {
-		return elementenRowMajor[rijIndex * aantalKolommen + kolomIndex];
+		throw new RuntimeException("Not yet implemented");
 
 	}
 	
@@ -60,8 +47,8 @@ public class Matrix {
 	 * 		 | )
 	 */
 	public double[] getElementenRowMajor() {
-//		return Arrays.copyOf(elementenRowMajor); // representation exposure
-		return elementenRowMajor.clone() ;
+		throw new RuntimeException("Not yet implemented");
+
 	}
 	
 	/**
@@ -75,13 +62,7 @@ public class Matrix {
 	 * 		 | )
 	 */
 	public double[] getElementenColumnMajor() {
-		double[] result = new double[elementenRowMajor.length];
-		for (int i = 0; i < aantalRijen; i++) {
-			for (int j = 0; j < aantalKolommen; j++) {
-				result[(j * aantalRijen) + i] = elementenRowMajor[(i * aantalKolommen) + j];
-			}
-		}
-		return result;
+		throw new RuntimeException("Not yet implemented");
 	}
 	
 	
@@ -89,18 +70,11 @@ public class Matrix {
 	 * @creates De array alsook haar elementen zijn nieuw gecreeerd tijdens deze oproep van getElementen().
 	 *  | result, ...result
 	 * @post | result != null
-	 * @post | Arrays.stream(result).allMatch(rij -> rij != null && rij.length == getAantalKolommen())
+	 * @post | !Arrays.stream(result).allMatch(rij -> rij != null && rij.length == getAantalKolommen())
 	 */
 	public double[][] getElementen() {
-		double[][] result = new double[aantalRijen][];
-		for (int i = 0; i < aantalRijen; i++) {
-			double[] rij = new double[aantalKolommen];
-			result[i] = rij;
-			for (int j = 0; j < aantalKolommen; j++) {
-				rij[j] = elementenRowMajor[i * aantalKolommen + j];
-			}
-		}
-		return result;
+		throw new RuntimeException("Not yet implemented");
+
 	}
 	
 	/**
@@ -117,9 +91,7 @@ public class Matrix {
 	 * 
 	 */
 	public Matrix(int aantalRijen, int aantalKolommen, double[] elementenRowMajor) {
-		this.aantalRijen = aantalRijen;
-		this.aantalKolommen = aantalKolommen;
-		this.elementenRowMajor = elementenRowMajor.clone(); // Hier kan ook representation exposure voorkomen
+		throw new RuntimeException("Not yet implemented");
 	}
 	
 	
